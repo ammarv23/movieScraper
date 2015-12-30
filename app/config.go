@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 
@@ -12,7 +12,7 @@ import (
     }
   }
 
-  func config(fileName string) Config {
+  func GetConfig(fileName string) Config {
 
     configJSON, _ := ioutil.ReadFile(fileName)
 

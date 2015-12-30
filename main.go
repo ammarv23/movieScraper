@@ -6,11 +6,13 @@ import (
   "net/http"
   "net/url"
 
-  "github.com/ammarv23/shuttler"
+  "github.com/ammarv23/movieScraper/lib"
+  "github.com/ammarv23/movieScraper/app"
 )
 
+
 func main() {
-  config := config("./config/development.json")
+  config := config.GetConfig("./config/development.json")
 
   u, err := url.Parse("http://api.themoviedb.org/3/movie/upcoming")
   if err != nil {
@@ -38,7 +40,5 @@ func main() {
   defer resp.Body.Close()
   resp_body, _ := ioutil.ReadAll(resp.Body)
 
-  //fmt.Println(string(resp_body))
-
-  shuttler.MapJson(resp_body)
+  parse.MapJson(resp_body)
 }
