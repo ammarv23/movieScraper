@@ -5,6 +5,8 @@ import (
   "fmt"
   "net/http"
   "net/url"
+
+  "github.com/ammarv23/shuttler"
 )
 
 func main() {
@@ -36,5 +38,7 @@ func main() {
   defer resp.Body.Close()
   resp_body, _ := ioutil.ReadAll(resp.Body)
 
-  fmt.Println(string(resp_body))
+  //fmt.Println(string(resp_body))
+
+  shuttler.MapJson(resp_body)
 }
