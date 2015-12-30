@@ -9,7 +9,7 @@ import (
 func main() {
   client := &http.Client{}
 
-  config := config()
+  config("./config/development.json")
 
   req, _ := http.NewRequest("GET", "http://api.themoviedb.org/3/movie/upcoming", nil)
 

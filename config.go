@@ -12,9 +12,9 @@ import (
     }
   }
 
-  func config() Config {
+  func config(fileName string) Config {
 
-    configJSON, _ := ioutil.ReadFile("../config/development.json")
+    configJSON, _ := ioutil.ReadFile(fileName)
 
     config := Config{}
 
