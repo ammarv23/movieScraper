@@ -4,14 +4,25 @@ import (
   "io/ioutil"
   "fmt"
   "net/http"
+  "net/url"
 )
 
 func main() {
+  config := config("./config/development.json")
+
+  u, err := url.Parse("http://api.themoviedb.org/3/movie/upcoming")
+  if err != nil {
+    panic(err)
+  }
+
+  q := u.Query()
+  q.Set("api_key", config.MovieDB.ApiKey)
+  u.RawQuery = q.Encode()
+  fmt.Println(u.String())
+
   client := &http.Client{}
 
-  config("./config/development.json")
-
-  req, _ := http.NewRequest("GET", "http://api.themoviedb.org/3/movie/upcoming", nil)
+  req, _ := http.NewRequest("GET", u.String(), nil)
 
   req.Header.Add("Accept", "application/json")
 
@@ -25,6 +36,5 @@ func main() {
   defer resp.Body.Close()
   resp_body, _ := ioutil.ReadAll(resp.Body)
 
-  fmt.Println(resp.Status)
   fmt.Println(string(resp_body))
 }
